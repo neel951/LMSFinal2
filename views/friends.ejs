@@ -1,0 +1,10 @@
+<%- include("partials/headerLoggedin"); -%>
+
+<a href="/searchPeople" type="button" class="btn btn-info">Search People?</a>
+<div>
+  <%for(var i = 0; i < friendsArr.length; i++) {%>
+    <a href="/friendBookShelf/:<%=friendsArr[i]%>" class="list-group-item list-group-item-action"><%=friendsArr[i]%></a>
+  <%}%>
+</div>
+
+<%- include("partials/footer"); -%>

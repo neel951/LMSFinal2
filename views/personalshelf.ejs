@@ -1,0 +1,25 @@
+<%- include("partials/headerLoggedin") -%>
+<%for(var i = 0; i < booksinshelf.length; i++) {%>
+  <div class="container mt-5">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= booksinshelf[i].book_title%></h5>
+      <%for(var j = 0; j < tagsArray[i].length; j++) {%>
+        <span class="badge bg-secondary"><%=tagsArray[i][j]%></span>
+      <%}%>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Author: <%=booksinshelf[i].book_author%></li>
+      <li class="list-group-item">Rating: <%=ratings[i]%></li>
+    </ul>
+    <div class="card-body">
+      <a href="/reviews/:<%=booksinshelf[i].ISBN%>" class="btn btn-primary">Check reviews </a>
+    </div>
+  </div>
+  </div>
+<%}%>
+
+
+<%- include("partials/footer") -%>
+
+

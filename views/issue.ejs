@@ -1,0 +1,45 @@
+<% if(criteria === 0) { %>
+<%- include("partials/header"); -%>
+<% } else { %>
+<%- include("partials/headerLoggedin"); -%>
+<% } %>
+
+<% switch(criteria) {
+    case 0: %>
+<div class="alert alert-secondary" role="alert">
+  You need to log in to proceed!
+</div>
+<% break;
+    case 11: %>
+<div class="alert alert-success" role="alert">
+  You have successfully issued the book!
+</div>
+<% break;
+  case 12: %>
+    <div class="alert alert-danger" role="alert">
+      Sorry, no copies available at the moment.
+    </div>
+<% break;
+   case 2: %>
+<div class="alert alert-danger" role="alert">
+  You have too many books already issued, consider returning some of them
+  before issuing new ones.
+</div>
+<% break;
+   case 3: %>
+<div class="alert alert-danger" role="alert">
+  You have too many unpaid fines, consider paying some of them before issuing
+  new books.
+</div>
+<% break;
+    case 4: %>
+<div class="alert alert-danger" role="alert">
+  You have too many unpaid fines as well as already issued books. Consider
+  handling those before issuing new books.
+</div>
+<% break;
+ } %>
+
+
+
+<%- include("partials/footer"); -%>

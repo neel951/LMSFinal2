@@ -1,0 +1,17 @@
+<% if(criteria === 0) { %>
+<%- include("partials/header"); -%>
+<% } else { %>
+<%- include("partials/headerLoggedin"); -%>
+<% } %>
+
+<% if(criteria == 1) { %>
+<div class="alert alert-success" role="alert">
+  You have Added the book to your personal shelf
+</div>
+<% } else { %>
+<div class="alert alert-danger" role="alert">
+  Log in to add to ur personal shelf
+</div>
+<% } %>
+
+<%- include("partials/footer") -%>
