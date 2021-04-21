@@ -1,5 +1,7 @@
 <%- include("partials/headerLoggedin") -%>
+<div class="row">
 <%for(var i = 0; i < booksinshelf.length; i++) {%>
+    <div class ="col-lg-4 col-md-6 ">
   <div class="container mt-5">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
@@ -16,10 +18,9 @@
       <a href="/reviews/:<%=booksinshelf[i].ISBN%>" class="btn btn-primary">Check reviews </a>
     </div>
   </div>
-  </div>
+</div>
+</div>
 <%}%>
-
+</div>
 
 <%- include("partials/footer") -%>
-
-

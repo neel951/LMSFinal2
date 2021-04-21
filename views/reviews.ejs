@@ -4,6 +4,7 @@
 <%- include("partials/header"); -%>
 <% } %>
 <%for(var i = 0; i < reviewsArrReviews.length; i++) {%>
+  <div class="container mt-5">
   <div class="card" style="width: 18rem;">
   <div class="card-header">
     <%=reviewsArrNames[i]%>
@@ -11,6 +12,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%=reviewsArrReviews[i]%></li>
   </ul>
+</div>
 </div>
 <%}%>
 <%- include("partials/footer") -%>

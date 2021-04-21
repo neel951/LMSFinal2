@@ -1,15 +1,23 @@
 <%- include("partials/headerLoggedin"); -%>
-
-<form action="/searchPeople" method="post">
-  <div class="mb-3">
-    <label for="username" class="form-label">User Name</label>
-    <input type="text" class="form-control" id="username" name="username">
-  </div>
-  <button type="submit" class="btn btn-primary">Search</button>
-</form>
-
-<% for(var i = 0; i < foundnames.length; i++) {%>
-  <a href="#" class="list-group-item list-group-item-action"><%=foundnames[i]%></a>
-  <a href="/addfriend/:<%=foundnames[i]%>">Add as friend?</a>
-<% } %>
-<%- include("partials/footer"); -%>
+            <div class="container h-100 ">
+                <div class="row h-100 justify-content-center align-items-center">
+                    <form action="/searchPeople" method="post">
+                        <div class="mb-3">
+                            <H2 style="text-align:center"><label for="username" class="form-label align-items-center">User Name</label></H2>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <button style="margin-bottom: 1%;" type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <% for(var i=0; i < foundnames.length; i++) {%>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <%=foundnames[i]%>
+                                </a>
+                                <a style="margin-top: 1%;" style="text-align:center" href="/addfriend/:<%=foundnames[i]%>">Add as friend?</a>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include("partials/footer"); -%>

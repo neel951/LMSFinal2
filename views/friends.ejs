@@ -1,10 +1,16 @@
 <%- include("partials/headerLoggedin"); -%>
-
-<a href="/searchPeople" type="button" class="btn btn-info">Search People?</a>
-<div>
-  <%for(var i = 0; i < friendsArr.length; i++) {%>
-    <a href="/friendBookShelf/:<%=friendsArr[i]%>" class="list-group-item list-group-item-action"><%=friendsArr[i]%></a>
-  <%}%>
+<div class="container ">
+    <div class="row  justify-content-center align-items-center">
+  
+        <a href="/searchPeople" type="button" class="btn btn-info">Search People?</a>
+        <div class="col-lg-10">
+            <%for(var i=0; i < friendsArr.length; i++) {%>
+                <a href="/friendBookShelf/:<%=friendsArr[i]%>" class="col-md-4 list-group-item list-group-item-action">
+                    <%=friendsArr[i]%>
+                </a>
+        
+        <%}%>
+    </div>
 </div>
-
-<%- include("partials/footer"); -%>
+</div>
+    <%- include("partials/footer"); -%>

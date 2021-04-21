@@ -1,12 +1,24 @@
-<%- include("partials/headerLoggedin"); -%>
-<% for(var i = 0; i < frndshelf.length; i++) { %>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><%= frndshelf[i].book_title %></h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+
+<%- include("partials/headerLoggedin") -%>
+<div class="row">
+<%for(var i = 0; i < frndshelf.length; i++) {%>
+    <div class ="col-lg-4 col-md-6 ">
+  <div class="container mt-5">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= frndshelf[i].book_title%></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Author: <%=frndshelf[i].book_author%></li>
+    </ul>
+    <div class="card-body">
+      <a href="/reviews/:<%=frndshelf[i].ISBN%>" class="btn btn-primary">Check reviews </a>
+    </div>
   </div>
 </div>
-<% } %>
+</div>
+<%}%>
+</div>
 
-<%- include("partials/footer"); -%>
+<%- include("partials/footer") -%>
