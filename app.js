@@ -395,6 +395,113 @@ app.get("/reviews/:isbn", function(req, res) {
   })
 })
 
+// Admin Login
+var adminLoggedIn = false;
+app.get("/adminlogin", function (req, res) {
+  res.render("adminlogin");
+});
+
+app.post("/adminlogin", function (req, res) {
+  const adminUser = req.body.username;
+  const adminPass = req.body.password;
+  if (adminUser === "admin123" && adminPass === "admin123") {
+    adminLoggedIn = true;
+    res.redirect("/admindashboard");
+  } else {
+    res.redirect("/adminlogin");
+  }
+});
+//Admin Dashboard
+app.get("/admindashboard", function (req, res) {
+  res.render("admindashboard");
+});
+// Admin Add Tag
+
+app.get("/adminaddtag", function(req, res) {
+  res.render("adminaddtag");
+})
+
+app.post("/adminaddtag", function(req, res) {
+  var tagdetail = req.body.tag;
+  var tagISBN = req.body.ISBN;
+  var tagid=0;
+  var sql1 = `INSERT INTO tags (tag_detail) VALUES ("${tagdetail}")`;
+  var sql2 = `SELECT tag_id FROM tags WHERE tag_detail = ("${tagdetail}")`;
+database.query(sql1, function(err, result) {
+    if(err) throw err;
+    console.log("New tag Inserted");
+    database.query(sql2, function(err1, result1) {
+      tagid=result1[0].tag_id;
+      console.log(tagid);
+      if(err1) throw err1;
+      var sql3 = `INSERT INTO has_tags (ISBN,tag_id) VALUES ("${tagISBN}","${tagid}")`;
+    database.query(sql3, function(err2, result2) {
+      if(err2) throw err2;
+      console.log("New tag ISBN Inserted");
+    })
+    })
+  })
+  res.redirect("/admindashboard");
+  
+})
+// End of Admin Add tag
+// Admin Add books
+
+app.get("/adminaddbook", function(req, res) {
+  res.render("adminaddbook");
+})
+app.post("/adminaddbook", function(req, res) {
+  var ISBN = req.body.ISBN;
+  var book_title = req.body.book_title;
+  var book_author = req.body.book_author;
+  var book_pub = req.body.book_pub;
+  var year_of_publication = req.body.year_of_publication;
+  var shelf_id = req.body.shelf_id;
+  var book_copy = req.body.book_copy;
+  var sql1 = `INSERT INTO books_details (ISBN,book_title,book_author,book_publisher,year_of_publication) VALUES ("${ISBN}","${book_title}","${book_author}","${book_pub}","${year_of_publication}")`;
+  var sql2 = `INSERT INTO books (ISBN,book_copy,shelf_id,current_status) VALUES ("${ISBN}","${book_copy}","${shelf_id}","${2}")`;
+  database.query(sql1, function(err, result) {
+    if(err) throw err;
+    console.log("New book Inserted");
+    database.query(sql2, function(err1, result1) {
+      if(err1) throw err1;
+      console.log("New book copy Inserted");
+    })
+  })
+  res.redirect("/admindashboard");
+})
+// End Admin Add books
+//Admin delete a book
+app.get("/admindeletebook", function(req, res) {
+  res.render("admindeletebook");
+})
+app.post("/admindeletebook", function(req, res) {
+  var ISBN = req.body.ISBN;
+  var book_copy = req.body.book_copy;
+  var sql1 = `DELETE FROM books WHERE ISBN = "${ISBN}" AND book_copy ="${book_copy}"`;
+  database.query(sql1, function(err, result) {
+    if(err) throw err;
+    console.log("Requested book deleted");
+  })
+  res.redirect("/admindashboard");
+})
+//end Admin delete a book
+//Admin shift a book
+app.get("/adminshelfchange", function(req, res) {
+  res.render("adminshelfchange");
+})
+app.post("/adminshelfchange", function(req, res) {
+  var ISBN = req.body.ISBN;
+  var shelf_id = req.body.shelf_id;
+  var sql1 = `UPDATE books SET shelf_id = "${shelf_id}"  WHERE ISBN = "${ISBN}" `;
+  database.query(sql1, function(err, result) {
+    if(err) throw err;
+    console.log("Requested book has been shifted");
+  })
+  res.redirect("/admindashboard");
+})
+//end Admin shift a book
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
